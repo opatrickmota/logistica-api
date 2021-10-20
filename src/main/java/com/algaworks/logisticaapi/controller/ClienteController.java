@@ -1,23 +1,22 @@
 package com.algaworks.logisticaapi.controller;
 
 import com.algaworks.logisticaapi.model.Cliente;
+import com.algaworks.logisticaapi.repository.ClienteRepository;
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Arrays;
 import java.util.List;
 
+@AllArgsConstructor
 @RestController
 public class ClienteController {
 
-    @GetMapping("/clientes")
-    public List<Cliente> listar(){
-        Cliente cliente1 = new Cliente();
-        cliente1.setId(1L);
-        cliente1.setNome("Joao");
-        cliente1.setEmail("joao@email.com");
-        cliente1.setTelefone("11999899452");
+    private ClienteRepository clienteRepository;
 
-        return Arrays.asList(cliente1, cliente1);
+    @GetMapping("/clientes")
+    public List<Cliente> listar() {
+        return clienteRepository.findAll();
     }
 }
